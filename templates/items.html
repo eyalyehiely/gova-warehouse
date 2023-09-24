@@ -1,0 +1,36 @@
+
+<link rel="stylesheet" href="/static/items.css">
+<h1>Items insert form</h1>
+<button style="margin-left: 20vw;"><a href="/add_items/update">Update an exist item</a></button>
+<div class="add_items">
+  <form action="/add_items" method="POST">
+    <div class="form">
+      <div><input type="text" name="mkt" required autofocus placeholder="Serial number"> </div>
+      <br>
+      <div>
+        <select name="category">
+          <option value="ropes">Ropes</option>
+          <option value="descenders">Descenders</option>
+          <option value="rope clamps">Rope clamps</option>
+          <option value="safety">Safety</option>
+          <option value="Metals">Metals</option>
+          <option value="textile">Textile</option>
+          <option value="tripods">Tripods</option>
+          <option value="stretcher">Stretcher</option>
+          <option value="specials">Specials</option>
+        </select>
+      </div>
+      <br>
+      <div><input type="text" name="item_name" required autofocus placeholder="Item name"></div>
+      <br>
+      <div><input type="number" name="quantity" required autofocus placeholder="Quantity"></div>
+      <br>
+      <div><input type="text" name="added_by" required autofocus placeholder="Added by"></div>
+      <br>
+      <div><p>Entrance date</p><input type="date" name="entrance_date" required autofocus placeholder="Entrance date"></div>
+      <br>
+      <div><input type="submit" value="Add!"></div>
+    </div>
+  </form>
+</div>
+

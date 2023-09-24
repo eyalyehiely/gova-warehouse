@@ -1,0 +1,33 @@
+<link rel="stylesheet" href="/static/requests.css">
+{%extends 'base.html'%}
+{%block navbar%}
+<h2>Add a new request</h2>
+<div class="request" >
+    <form action="/requests" method="POST">
+        <div><input type="text" name="username" required autofocus placeholder="Username"></div>
+        <br>
+        <div><input type="email" name="email" required autofocus placeholder="Email"></div>
+        <br>
+        <label for="ropes">ropes</label>
+        <select name="ropes" id="ropes" >
+            <option value="static rope">static ropes</option>
+            <option value="dynamic rope">dynamic ropes</option>
+        
+
+        </select>
+        <br>
+        <div><input type="date" name="taking" required autofocus placeholder="Taking date"></div>
+        <br>
+        <div><input type="date" name="taking" required autofocus placeholder="Returning date"></div>
+        <br>
+        <div><input type="tel" name="telephone"required autofocus placeholder="Phone number"></div>
+        <br>
+        <div><input type="submit" value="send"></div>
+    </form>
+</div>
+{%endblock%}
+
+
+
+{%block footer%}
+{%endblock%}

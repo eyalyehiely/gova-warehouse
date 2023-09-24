@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="/static/login.css">
+</head>
+<body>
+  <div class="logo">
+    <img id="img1" src="/static/monkey.jpeg">
+    <img src="/static/tgh.jpeg" >
+  </div>
+    <h1>Gova Warehouse</h1>
+  
+
+  <div class="login">
+  
+    <form action="/login" method="POST">
+      <div><input type="text" name="username" required autofocus placeholder="Enter username"></div>
+      <br>
+      <div><input type="password" name="password" required autofocus placeholder="Enter password"></div>
+      <br>
+      <div><input type="submit" value="login">
+       or
+      <button style="background-color:grey"><a href="/register">Sign up</a></button></div>
+    </form>
+  </div> 
+ <div class="footer">
+  {%block footer%}
+  {%endblock%}
+ </div>
+</body>                     
+</html>

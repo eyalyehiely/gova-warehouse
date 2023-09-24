@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register</title>
+  <link rel="stylesheet" href="/static/register.css">
+</head>
+<body>
+  <div class="logo">
+    <img src="/static/monkey.jpeg">
+    <img src="/static/tgh.jpeg">
+  </div>
+  <h1>Sign up </h1>
+  <div class="register">
+    <form action="/register" method="POST">
+        <div><input type="text" name="name" required autofocus placeholder="Full name"></div>
+        <br>
+        <div><input type="text" name="username" required autofocus placeholder="Username"></div>
+        <br>
+        <div><input type="password" name="password" required autofocus placeholder="Password"></div>
+        <br>
+        <div><input type="text" name="phone" required autofocus placeholder="Phone number"></div>
+        <br>
+        <div><input type="email" name="email" required autofocus placeholder="Email"> </div>
+        <div>
+        <p>Enter your team:</p>
+        <input type="radio" name="team" />  Monkeys<br />
+        <input type="radio" name="team" />  Tgh<br />
+        <input type="radio" name="team" />  Training<br />
+        </div>
+        <div id="submit"><input type="submit" value="register"></div>
+    </form>
+  <div>I already have a user<button><a href="/login">login</a></button></div>
+  
+  </div> 
+  <br><br><hr>
+<div> <p><a href="mailto:govawarehouse@gmail.com">click here</a> to send us an email </p></div>
+</body>
+</html> 
