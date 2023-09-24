@@ -4,15 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gova Warehouse</title>
+    <link rel="stylesheet" href="/static/updating_items.css">
 </head>
 <body>
     <h1>Update items form</h1>
-<div class="add_items">
+    <button><a href="/add_items">return</a></button>
+  
+<div class="form">
   <form action="/add_items/update" method="POST">
-    <div><input type="text" name="serial_num" required autofocus placeholder="Serial number"> </div>
+    <div><input type="text" name="mkt" required autofocus placeholder="Serial number"> </div>
+    <br>
     <div><input type="number" name="quantity" required autofocus placeholder="Quantity"></div>
+    <br>
     <div><input type="text" name="added_by" required autofocus placeholder="Added by"></div>
-    <div><p>Updating date</p><input type="date" name="updating_date" required autofocus placeholder="Updating date"></div>
+    <br>
     <div><input type="submit" value="Add!"></div>
   </form>
 </div>

@@ -27,7 +27,7 @@ def items_data():
     rows = (query(f"SELECT * FROM items "))
     table =[]
     for row in rows:
-        table.append({'serial number(mkt)':row[0],'category':row[1],'item_name':row[2],'quantity':row[3],'added by':row[4],'entrance date':row[5],'updaating date':row[6]})
+        table.append({'mkt':row[0],'category':row[1],'item_name':row[2],'quantity':row[3],'added by':row[4],'entrance date':row[5],'updaating date':row[6]})
     return table
 items_table = items_data()
 
@@ -81,14 +81,14 @@ def register():
     
      
 
-#items
+#items - add items + update items
 #--------------------------------------------------------------------------------#
 @app.route('/add_items',methods = ['GET','POST'])
 def get_items():
     if session.get('username') != 'admin':
         return redirect('/')
     
-    query(f"INSERT INTO items VALUES('{request.form.get('mkt')}', '{request.form.get('category')}', '{request.form.get('item_name')}', '{request.form.get('quantity')}', '{request.form.get('added_by')}','{request.form.get('entrance_date')}','{request.form.get('entrance_date')}')")
+    query(f"INSERT INTO items VALUES('{request.form.get('mkt')}', '{request.form.get('category')}', '{request.form.get('item_name')}', '{request.form.get('quantity')}', '{request.form.get('added_by')}','{request.form.get('entrance_date')}','{datetime.datetime.now()}')")
     return render_template('items.html')
 
 
@@ -96,11 +96,12 @@ def get_items():
 def update_items():
     if session.get('username') != 'admin':
         return redirect('/')
-    
-    
-    query(f"UPDATE items SET quantity={request.form.get('quantity')} WHERE 'mkt'='{request.form.get('serial_num')}'")
+    for item in items_table:
+        if request.form.get('mkt') == item['mkt']:
+            query(f"UPDATE items SET quantity= quantity +'{int(request.form.get('quantity'))}' WHERE mkt='{request.form.get('mkt')}'")
+    query(f"UPDATE items SET added_by='{request.form.get('added_by')}' WHERE mkt='{request.form.get('mkt')}'")
+    query(f"UPDATE items SET updating_date='{datetime.datetime.now()}' WHERE mkt='{request.form.get('mkt')}'")
     return render_template('update_items.html')
-
 
 
 
