@@ -1,0 +1,14 @@
+{%extends 'base.html'%}
+{%block navbar%}
+<link rel="stylesheet" href="/static/delete_user.css">
+<h1>Delete user</h1>
+<div class="delete_user">
+    <form action="/admin/users_menu/delete" method="POST">
+    <div><input type="text" name="username" required autofocus placeholder="Username"></div>
+        <br>
+        <div><input type="password" name="password" required autofocus placeholder="Password"></div>
+        <br>
+        <div><input type="submit" value="Delete!"></div>
+    </form>
+  </div>
+{%endblock%}

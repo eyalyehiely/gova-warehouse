@@ -4,21 +4,11 @@
 <h2>Add a new request</h2>
 <div class="request" >
     <form action="/add_requests" method="POST">
-        <div><input type="text" name="username" required autofocus placeholder="Username"></div>
+        items
         <br>
-        <div><input type="email" name="email" required autofocus placeholder="Email"></div>
+        <div>Taking date <input type="date" name="taking_date" required autofocus placeholder="Taking date"></div>
         <br>
-        <label for="ropes">ropes</label>
-        <select name="ropes" id="ropes" >
-            <option value="static rope">static ropes</option>
-            <option value="dynamic rope">dynamic ropes</option>
-        </select>
-        <br>
-        <div><input type="date" name="taking" required autofocus placeholder="Taking date"></div>
-        <br>
-        <div><input type="date" name="taking" required autofocus placeholder="Returning date"></div>
-        <br>
-        <div><input type="tel" name="telephone"required autofocus placeholder="Phone number"></div>
+        <div>Returning date <input type="date" name="returning_date" required autofocus placeholder="Returning date"></div>
         <br>
         <div><input type="submit" value="send"></div>
     </form>

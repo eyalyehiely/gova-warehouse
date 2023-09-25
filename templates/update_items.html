@@ -1,17 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gova Warehouse</title>
+{%extends 'base.html'%}
+{%block navbar%}
     <link rel="stylesheet" href="/static/updating_items.css">
-</head>
-<body>
+
     <h1>Update items form</h1>
     <button style="background-color:grey;"><a href="/items">return</a></button>
   
 <div class="form">
-  <form action="/items/update" method="POST">
+  <form action="/admin/items/update" method="POST">
     <div><input type="text" name="mkt" required autofocus placeholder="Serial number"> </div>
     <br>
     <div><input type="number" name="quantity" required autofocus placeholder="Quantity"></div>
@@ -21,5 +16,5 @@
     <div><input type="submit" value="Add!"></div>
   </form>
 </div>
-</body>
-</html>
+
+{%endblock%}

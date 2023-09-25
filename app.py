@@ -77,11 +77,23 @@ def register():
     query(f"INSERT INTO users VALUES('{request.form['name']}' ,'{request.form['username']}' , '{request.form['password']}' , '{request.form['phone']}' , '{request.form['email']}', '{request.form['team']}' )")
     session['username'] = request.form['username'] 
     return redirect('/')
+
+
+#users menu - admin
+@app.route('/admin/users_menu')
+def users_menu():
+    if session.get('username') == 'admin':
+        return render_template('users_menu.html')
     
+@app.route('/admin/users_menu/delete',methods = ['GET','POST'])
+def delete_user():
+    query(f"DELETE FROM users WHERE username='{request.form.get('username')}'")
+    
+    return render_template('delete_user.html')
     
      
 
-#items - add items + update items
+#items - add,update,delete,read
 #--------------------------------------------------------------------------------#
 #items menu
 @app.route('/items')
@@ -107,7 +119,7 @@ def get_items():
 
 
 #update items
-@app.route('/items/update', methods = ['GET','POST'])
+@app.route('/admin/items/update', methods = ['GET','POST'])
 def update_items():
     if session.get('username') != 'admin':
         return redirect('/')
@@ -121,12 +133,16 @@ def update_items():
 
 
 
+@app.route('/admim/items/delete',methods = ['GET','POST'])
+def delete_item():
+    query(f"DELETE FROM items WHERE mkt='{request.form.get('mkt')}'")
+    
+    return render_template('delete_items.html')
 
 
 
 
-
-#show all items
+#show all items(items list)
 @app.route('/items/items_list')
 def items_list():
     if session.get('username') != 'admin':
@@ -182,6 +198,8 @@ def exit():
 def admin():
     if session.get('username') == 'admin':
         return render_template('admin.html')
+    else:
+        return render_template('admin_error.html')
     
 
 

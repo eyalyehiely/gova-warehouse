@@ -1,0 +1,15 @@
+
+{%extends 'base.html'%}
+{%block navbar%}
+<link rel="stylesheet" href="/static/delete_item.css">
+<h1>Delete item</h1>
+<div class="delete_item">
+    <form action="/admim/items/delete" method="POST">
+    <div><input type="text" name="mkt" required autofocus placeholder="Item serial number"></div>
+        <br>
+        <br>
+        <div><input type="submit" value="Delete!"></div>
+    </form>
+  </div>
+
+{%endblock%}

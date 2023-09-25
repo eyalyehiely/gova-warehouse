@@ -1,16 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gova Warehouse</title>
-</head>
-<body>
+{%extends 'base.html'%}
+{%block navbar%}
 <h1>Items list</h1>
 
 <a href="/items">return</a>
-
-  
 
 <table border="1"> 
     <tr> 
@@ -26,7 +18,7 @@
 
     {%for item in items_table%}
         <tr>
-            
+            <td>{{item.index}}</td>
             <td>{{item.mkt}}</td> 
             <td>{{item.category}}</td>
             <td>{{item.item_name}}</td>
@@ -41,5 +33,5 @@
 </table>
 
 
-</body>
-</html>
+
+{%endblock%}
