@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gova Warehouse</title>
+</head>
+<body>
+<h1>Items list</h1>
+
+<a href="/items">return</a>
+
+  
+
+<table border="1"> 
+    <tr> 
+        <th>number</th>
+        <th>mkt</th>
+        <th>category</th>
+        <th>item name</th>
+        <th>quantity</th>
+        <th>added_by</th>
+        <th>entrance date</th>
+        <th>updating date</th>
+    </tr>
+
+    {%for item in items_table%}
+        <tr>
+            
+            <td>{{item.mkt}}</td> 
+            <td>{{item.category}}</td>
+            <td>{{item.item_name}}</td>
+            <td>{{item.quantity}}</td>
+            <td>{{item.added_by}}</td>
+            <td>{{item.entrance_date}}</td>
+            <td>{{item.updating_date}}</td>
+        </tr>
+    {%endfor%}
+   
+
+</table>
+
+
+</body>
+</html>

@@ -83,19 +83,35 @@ def register():
 
 #items - add items + update items
 #--------------------------------------------------------------------------------#
-@app.route('/add_items',methods = ['GET','POST'])
+#items menu
+@app.route('/items')
+def items():
+    if session.get('username') != 'admin':
+        return redirect('/')
+    return render_template('items_menu.html')
+
+
+
+
+#add items
+@app.route('/items/add_items',methods = ['GET','POST'])
 def get_items():
     if session.get('username') != 'admin':
         return redirect('/')
     
     query(f"INSERT INTO items VALUES('{request.form.get('mkt')}', '{request.form.get('category')}', '{request.form.get('item_name')}', '{request.form.get('quantity')}', '{request.form.get('added_by')}','{request.form.get('entrance_date')}','{datetime.datetime.now()}')")
-    return render_template('items.html')
+    return render_template('add_items.html')
 
 
-@app.route('/add_items/update', methods = ['GET','POST'])
+
+
+
+#update items
+@app.route('/items/update', methods = ['GET','POST'])
 def update_items():
     if session.get('username') != 'admin':
         return redirect('/')
+    
     for item in items_table:
         if request.form.get('mkt') == item['mkt']:
             query(f"UPDATE items SET quantity= quantity +'{int(request.form.get('quantity'))}' WHERE mkt='{request.form.get('mkt')}'")
@@ -109,27 +125,41 @@ def update_items():
 
 
 
+
+#show all items
+@app.route('/items/items_list')
+def items_list():
+    if session.get('username') != 'admin':
+        return redirect('/')
+    
+    return render_template('items_list.html',items_table=items_table)
+
+
+
+
+
+
 #requests
 #----------------------------------------------------------------------------------#
-# def save_requests(table:list):
-#     with open('requests.pickle','wb') as f:
-#         pickle.dump(table,f)
+
+@app.route('/requests',methods = ['POST','GET'])
+def requests():
+   for user in users_table:
+        if session.get('username') == user['username']:
+            return render_template('requests.html')
+        else:
+            return redirect('/login')
         
 
-# def upload_requests():
-#     with open('requests.pickle','rb') as f:
-#         requests_table = pickle.load(f)
-#     return requests_table
 
 
-# @app.route('/requests',methods = ['POST','GET'])
-# def requests():
-#    for user in users:
-#         if session.get('username') == user['username']:
-#             # cookie_names.append(session.get('username'))
-#             return render_template('requests.html',items_selsection(),username = user['username'])
-#         else:
-#             return redirect('/login')
+@app.route('/add_requests',methods = ['POST','GET'])
+def add_requests():
+   for user in users_table:
+        if session.get('username') == user['username']:
+            return render_template('add_requests.html')
+        else:
+            return redirect('/login')
 
 
 

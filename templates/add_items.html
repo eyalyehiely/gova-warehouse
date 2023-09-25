@@ -1,11 +1,16 @@
 
 <link rel="stylesheet" href="/static/items.css">
+<title>Gova Warehouse</title>
 <h1>Items insert form</h1>
-<button style="margin-left: 20vw;"><a href="/add_items/update">Update an exist item</a></button>
-<button style="margin-left: 20vw;"><a href="">Items list</a></button>
+<div class="navbar">
+  <a href="/items">return</a>
+  
+ 
+</div>
+
 
 <div class="add_items">
-  <form action="/add_items" method="POST">
+  <form action="/items/add_items" method="POST">
     <div class="form">
       <div><input type="text" name="mkt" required autofocus placeholder="Serial number"> </div>
       <br>

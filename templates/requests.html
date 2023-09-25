@@ -1,33 +1,12 @@
-<link rel="stylesheet" href="/static/requests.css">
-{%extends 'base.html'%}
-{%block navbar%}
-<h2>Add a new request</h2>
-<div class="request" >
-    <form action="/requests" method="POST">
-        <div><input type="text" name="username" required autofocus placeholder="Username"></div>
-        <br>
-        <div><input type="email" name="email" required autofocus placeholder="Email"></div>
-        <br>
-        <label for="ropes">ropes</label>
-        <select name="ropes" id="ropes" >
-            <option value="static rope">static ropes</option>
-            <option value="dynamic rope">dynamic ropes</option>
-        
-
-        </select>
-        <br>
-        <div><input type="date" name="taking" required autofocus placeholder="Taking date"></div>
-        <br>
-        <div><input type="date" name="taking" required autofocus placeholder="Returning date"></div>
-        <br>
-        <div><input type="tel" name="telephone"required autofocus placeholder="Phone number"></div>
-        <br>
-        <div><input type="submit" value="send"></div>
-    </form>
-</div>
-{%endblock%}
-
-
-
-{%block footer%}
-{%endblock%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1> my requests</h1>
+    <a href="/add_requests">add a new request</a>
+</body>
+</html>
