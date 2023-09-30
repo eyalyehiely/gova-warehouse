@@ -1,7 +1,8 @@
 #general
 #-------------------------------------------------------------------------#  
-from flask import Flask,render_template,redirect,request,session,make_response,Response
-import pickle,sqlite3,datetime
+from flask import Flask,render_template,redirect,request,session,send_file
+import sqlite3,datetime
+import pandas,flask_excel
 app = Flask(__name__)
 app.secret_key = 'fghdfghdfgh'
 
@@ -90,6 +91,12 @@ def delete_user():
     query(f"DELETE FROM users WHERE username='{request.form.get('username')}'")
     
     return render_template('delete_user.html')
+
+
+with sqlite3.connect('users.db') as conn: 
+    query1 = "SELECT * FROM users" 
+    df = pandas.read_sql_query(query1, conn)
+    df.to_csv('users.csv', index=False)
     
      
 
@@ -111,7 +118,7 @@ def get_items():
     if session.get('username') != 'admin':
         return redirect('/')
     
-    query(f"INSERT INTO items VALUES('{request.form.get('mkt')}', '{request.form.get('category')}', '{request.form.get('item_name')}', '{request.form.get('quantity')}', '{request.form.get('added_by')}','{request.form.get('entrance_date')}','{datetime.datetime.now()}')")
+    query(f"INSERT INTO items VALUES('{request.form.get('mkt')}', '{request.form.get('category')}', '{request.form.get('item_name')}', '{request.form.get('quantity')}','{request.form.get('quantity')}' '{request.form.get('added_by')}','{request.form.get('entrance_date')}','{datetime.datetime.now()}')")
     return render_template('add_items.html')
 
 
@@ -127,6 +134,7 @@ def update_items():
     for item in items_table:
         if request.form.get('mkt') == item['mkt']:
             query(f"UPDATE items SET quantity= quantity +'{int(request.form.get('quantity'))}' WHERE mkt='{request.form.get('mkt')}'")
+            query(f"UPDATE items SET quantity_in_stock = quantity_in_stock +'{int(request.form.get('quantity'))}' WHERE mkt='{request.form.get('mkt')}'")
     query(f"UPDATE items SET added_by='{request.form.get('added_by')}' WHERE mkt='{request.form.get('mkt')}'")
     query(f"UPDATE items SET updating_date='{datetime.datetime.now()}' WHERE mkt='{request.form.get('mkt')}'")
     return render_template('update_items.html')
@@ -149,6 +157,9 @@ def items_list():
         return redirect('/')
     
     return render_template('items_list.html',items_table=items_table)
+
+
+
 
 
 
@@ -200,6 +211,29 @@ def admin():
         return render_template('admin.html')
     else:
         return render_template('admin_error.html')
-    
+
+
+
+@app.route('/download_file')
+def download_excel():
+  
+
+    with sqlite3.connect('users.db') as conn: 
+        query1 = "SELECT * FROM items" 
+        df = pandas.read_sql_query(query1, conn)
+   
+    df.to_excel(index=False, sheet_name='items')
+   
+
+    # Send the Excel file as a downloadable response
+    return send_file(
+        'items.xlsx',
+        as_attachment=True,
+        download_name='items.xlsx',
+        mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    )
+
+
+
 
 

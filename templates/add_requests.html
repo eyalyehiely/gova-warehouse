@@ -4,7 +4,12 @@
 <h2>Add a new request</h2>
 <div class="request" >
     <form action="/add_requests" method="POST">
-        items
+        <div>
+            <input type="text" name="item" required autofocus placeholder="Item">
+            <input type="number" name="item_quantity" required autofocus placeholder="quantity">
+            <button>Add item</button>
+        
+        </div>
         <br>
         <div>Taking date <input type="date" name="taking_date" required autofocus placeholder="Taking date"></div>
         <br>
