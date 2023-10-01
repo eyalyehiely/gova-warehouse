@@ -2,15 +2,55 @@
 {%extends 'base.html'%}
 {%block navbar%}
 <h2>Add a new request</h2>
-<div class="request" >
+<div class="request">
     <form action="/add_requests" method="POST">
-        <div>
-            <input type="text" name="item" required autofocus placeholder="Item">
-            <input type="number" name="item_quantity" required autofocus placeholder="quantity">
-            <button>Add item</button>
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        </head>
+        <body>
+            <div class="container">
+                <form>
+                    <div class="form-group">
+                        <label for="eyal">Item Category</label>
+                        <select class="form-control" name="Category" id="category">
+                            <option value="1">1</option>
+                            <option value="ropes">ropes</option>
+                        </select>
+                    </div>
         
-        </div>
-        <br>
+                    <div class="form-group">
+                        <label for="item">Item Name</label>
+                        <select class="form-control" name="Item" id="category-item"></select>
+                    </div>
+                </form>
+        
+                <script>
+                    const category = document.getElementById('category');
+                    category.addEventListener("change", async function(){
+                        let category_value = category.value;
+                        console.log(category_value);
+                        const data = await fetch(`http://127.0.0.1:5000/options`);
+                        const items = await data.json();
+                        console.log(items);
+                        const category_item = document.getElementById('category-item');
+                        category_item.innerHTML = '';
+                        items.forEach(item => {
+                            const option = document.createElement('option');
+                            option.value = item.id;
+                            option.innerText = item.name;
+                            category_item.appendChild(option);
+                        });
+                    })
+                </script>
+            </div>
+        </body>
+        </html>
+        
         <div>Taking date <input type="date" name="taking_date" required autofocus placeholder="Taking date"></div>
         <br>
         <div>Returning date <input type="date" name="returning_date" required autofocus placeholder="Returning date"></div>

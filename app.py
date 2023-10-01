@@ -1,8 +1,13 @@
 #general
 #-------------------------------------------------------------------------#  
-from flask import Flask,render_template,redirect,request,session,send_file
+from flask import Flask,render_template,redirect,request,session,send_file, jsonify
 import sqlite3,datetime,pandas
+import flask_swagger,flask_swagger_ui
+from flask_cors import CORS
+
+
 app = Flask(__name__)
+CORS(app,headers='Content-Type')
 app.secret_key = 'fghdfghdfgh'
 
 def query (sql):
@@ -188,16 +193,15 @@ def add_requests():
             return redirect('/login')
         
 
-@app.route('/add_requests/new_item')
+@app.route('/options', methods= ["GET"])
 def new_item():
-    pass
- 
-sql_items = [
-    {'id':query(f"SELECT mkt FROM items "),'item name':query(f'SELECT "item name" FROM items ')}
-        ]
+    items = [
+        {'id':'option1','item name':'atc'},
+        {'id':'option2','item name':'asap'}
+            ]
+    return jsonify(items)
     
-for i in  sql_items:
-    print(i)
+
 
 
 
@@ -254,4 +258,3 @@ def excel_users():
 
 
 
-    
