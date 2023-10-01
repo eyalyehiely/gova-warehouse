@@ -78,7 +78,8 @@ def register():
     
     for user in users_table:
         if request.form['username'] == user['username']:
-            return render_template ("user_error.html")
+            message ='No valid user'
+            return render_template('register.html',message=message)
     query(f"INSERT INTO users VALUES('{request.form['name']}' ,'{request.form['username']}' , '{request.form['password']}' , '{request.form['phone']}' , '{request.form['email']}', '{request.form['team']}' )")
     session['username'] = request.form['username'] 
     return redirect('/')
@@ -122,8 +123,15 @@ def get_items():
     if session.get('username') != 'admin':
         return redirect('/')
     
-    query(f"INSERT INTO items VALUES('{request.form.get('mkt')}', '{request.form.get('category')}', '{request.form.get('item_name')}', '{request.form.get('quantity')}','{request.form.get('quantity')}' '{request.form.get('added_by')}','{request.form.get('entrance_date')}','{datetime.datetime.now()}')")
-    return render_template('add_items.html')
+    for item in items_table:
+        if request.form.get("mkt") == item["mkt"]:
+           message1 = 'item is already exist'
+           return render_template('add_items.html',message1=message1,switch=1)
+        pass
+           
+    query(f"INSERT INTO items VALUES('{request.form.get('mkt')}', '{request.form.get('category')}', '{request.form.get('item_name')}', '{request.form.get('quantity')}','{request.form.get('quantity')}' ,'{request.form.get('added_by')}','{request.form.get('entrance_date')}','{datetime.datetime.now()}')")
+    message2 = 'item added successfully'
+    return render_template('add_items.html',message2=message2,switch=2)
 
 
 
@@ -132,16 +140,22 @@ def get_items():
 #update items
 @app.route('/admin/items/update', methods = ['GET','POST'])
 def update_items():
+    switch = False
     if session.get('username') != 'admin':
         return redirect('/')
-    
-    for item in items_table:
-        if request.form.get('mkt') == item['mkt']:
-            query(f"UPDATE items SET quantity= quantity +'{int(request.form.get('quantity'))}' WHERE mkt='{request.form.get('mkt')}'")
-            query(f"UPDATE items SET quantity_in_stock = quantity_in_stock +'{int(request.form.get('quantity'))}' WHERE mkt='{request.form.get('mkt')}'")
-    query(f"UPDATE items SET added_by='{request.form.get('added_by')}' WHERE mkt='{request.form.get('mkt')}'")
-    query(f"UPDATE items SET updating_date='{datetime.datetime.now()}' WHERE mkt='{request.form.get('mkt')}'")
-    return render_template('update_items.html')
+           
+    try:
+        for item in items_table:
+            if request.form.get('mkt') == item['mkt']:
+                query(f"UPDATE items SET quantity= quantity +'{int(request.form.get('quantity'))}' WHERE mkt='{request.form.get('mkt')}'")
+                query(f"UPDATE items SET quantity_in_stock = quantity_in_stock +'{int(request.form.get('quantity'))}' WHERE mkt='{request.form.get('mkt')}'")
+                switch=True
+        query(f"UPDATE items SET added_by='{request.form.get('added_by')}' WHERE mkt='{request.form.get('mkt')}'")
+        query(f"UPDATE items SET updating_date='{datetime.datetime.now()}' WHERE mkt='{request.form.get('mkt')}'")
+        return render_template('update_items.html',switch=switch)
+    except:
+        return render_template('update_items.html',switch=False)
+
 
 
 
@@ -150,19 +164,6 @@ def delete_item():
     query(f"DELETE FROM items WHERE mkt='{request.form.get('mkt')}'")
     
     return render_template('delete_items.html')
-
-
-
-
-#show all items(items list)
-@app.route('/items/items_list')
-def items_list():
-    if session.get('username') != 'admin':
-        return redirect('/')
-    
-    return render_template('items_list.html',items_table=items_table)
-
-
 
 
 
@@ -196,7 +197,7 @@ def add_requests():
 @app.route('/options', methods= ["GET"])
 def new_item():
     items = [
-        {'id':'option1','item name':'atc'},
+        {'id':'ropes','item name':'atc'},
         {'id':'option2','item name':'asap'}
             ]
     return jsonify(items)

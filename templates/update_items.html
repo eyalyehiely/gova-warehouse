@@ -15,6 +15,17 @@
     <br>
     <div><input type="submit" value="Add!"></div>
   </form>
+
+
+    {%if switch%}
+    <div class="alert-success">
+      item updated
+    </div>
+    {%else%}
+    <div class="alert-danger">
+      item doesn't exist
+    </div>
 </div>
 
+{%endif%}
 {%endblock%}
