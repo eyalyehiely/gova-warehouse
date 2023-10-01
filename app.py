@@ -1,8 +1,7 @@
 #general
 #-------------------------------------------------------------------------#  
 from flask import Flask,render_template,redirect,request,session,send_file
-import sqlite3,datetime
-import pandas,flask_excel
+import sqlite3,datetime,pandas
 app = Flask(__name__)
 app.secret_key = 'fghdfghdfgh'
 
@@ -187,7 +186,18 @@ def add_requests():
             return render_template('add_requests.html')
         else:
             return redirect('/login')
+        
 
+@app.route('/add_requests/new_item')
+def new_item():
+    pass
+ 
+sql_items = [
+    {'id':query(f"SELECT mkt FROM items "),'item name':query(f'SELECT "item name" FROM items ')}
+        ]
+    
+for i in  sql_items:
+    print(i)
 
 
 
@@ -213,27 +223,35 @@ def admin():
         return render_template('admin_error.html')
 
 
-
-@app.route('/download_file')
-def download_excel():
-  
-
+#export items table to excel 
+@app.route('/download_file',methods = ['GET','POST'])
+def excel_items():
     with sqlite3.connect('users.db') as conn: 
         query1 = "SELECT * FROM items" 
         df = pandas.read_sql_query(query1, conn)
-   
-    df.to_excel(index=False, sheet_name='items')
-   
-
-    # Send the Excel file as a downloadable response
+    df.to_excel('items.xlsx',index=False)
     return send_file(
         'items.xlsx',
         as_attachment=True,
-        download_name='items.xlsx',
+        download_name='items_data.xlsx',
         mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-    )
+        )
+
+
+#export users table to excel 
+@app.route('/download_excel_users',methods = ['GET','POST'])
+def excel_users():
+    with sqlite3.connect('users.db') as conn: 
+        query1 = "SELECT * FROM users" 
+        df = pandas.read_sql_query(query1, conn)
+    df.to_excel('users.xlsx',index=False)
+    return send_file(
+        'users.xlsx',
+        as_attachment=True,
+        download_name='users_data.xlsx',
+        mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        )
 
 
 
-
-
+    

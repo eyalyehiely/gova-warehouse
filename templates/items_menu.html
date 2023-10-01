@@ -8,9 +8,11 @@
     <a href="/admin/items/update">update items</a>
     <a href="/items/items_list">items list</a>
     <a href="/admim/items/delete">Delete item</a>
-    <a href="download_file"download='items.xlsx' >items list(excel)</a>
 </div>
 
+<form action="/download_file" method="POST">
+   <input type="submit" value="export to excel">
+</form>
 {%endblock%}
   
 

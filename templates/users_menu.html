@@ -1,7 +1,12 @@
 {%extends 'base.html'%}
 {%block navbar%}
 <h1>users menu</h1>
-<a href="/admin/users_menu/delete">Delete user</a>
-<a href="/users.csv" download="users.csv">Export All users</a>
+<div>
+    <a href="/admin/users_menu/delete">Delete user</a>
+    <form action="/download_excel_users" method="POST">
+        <input type="submit" value="export to excel">
+     </form>
+    
+</div>
 
 {%endblock%}
