@@ -2,7 +2,7 @@
 #-------------------------------------------------------------------------#  
 from flask import Flask,render_template,redirect,request,session,send_file, jsonify
 import sqlite3,datetime,pandas
-import flask_swagger,flask_swagger_ui
+import random
 from flask_cors import CORS
 
 
@@ -35,6 +35,19 @@ def items_data():
         table.append({'mkt':row[0],'category':row[1],'item_name':row[2],'quantity':row[3],'added by':row[4],'entrance date':row[5],'updaating date':row[6]})
     return table
 items_table = items_data()
+
+
+def requests_data():
+    rows = (query(f"SELECT * FROM requests "))
+    table =[]
+    for row in rows:
+        table.append({'request number':row[0],'username':row[1],'email':row[2],'phone number':row[3],'items':row[4],'quantity':row[5],'taking date':row[6],'returning date':row[7]})
+    return table
+requests_table = requests_data()
+
+
+
+
 
 #Users - login-register-homepage
 #-------------------------------------------------------------------------#  
@@ -145,21 +158,18 @@ def get_items():
 #update items
 @app.route('/admin/items/update', methods = ['GET','POST'])
 def update_items():
-    switch = False
     if session.get('username') != 'admin':
         return redirect('/')
            
-    try:
-        for item in items_table:
-            if request.form.get('mkt') == item['mkt']:
-                query(f"UPDATE items SET quantity= quantity +'{int(request.form.get('quantity'))}' WHERE mkt='{request.form.get('mkt')}'")
-                query(f"UPDATE items SET quantity_in_stock = quantity_in_stock +'{int(request.form.get('quantity'))}' WHERE mkt='{request.form.get('mkt')}'")
-                switch=True
-        query(f"UPDATE items SET added_by='{request.form.get('added_by')}' WHERE mkt='{request.form.get('mkt')}'")
-        query(f"UPDATE items SET updating_date='{datetime.datetime.now()}' WHERE mkt='{request.form.get('mkt')}'")
-        return render_template('update_items.html',switch=switch)
-    except:
-        return render_template('update_items.html',switch=False)
+   
+    for item in items_table:
+        if request.form.get('mkt') == item['mkt']:
+            query(f"UPDATE items SET quantity= quantity +'{int(request.form.get('quantity'))}' WHERE mkt='{request.form.get('mkt')}'")
+            query(f"UPDATE items SET quantity_in_stock = quantity_in_stock +'{int(request.form.get('quantity'))}' WHERE mkt='{request.form.get('mkt')}'")
+
+    query(f"UPDATE items SET added_by='{request.form.get('added_by')}' WHERE mkt='{request.form.get('mkt')}'")
+    query(f"UPDATE items SET updating_date='{datetime.datetime.now()}' WHERE mkt='{request.form.get('mkt')}'")
+    return render_template('update_items.html')
 
 
 
@@ -187,6 +197,16 @@ def requests():
         else:
             return redirect('/login')
         
+# def request_number():
+#     serial= '0'
+#     for i in range(10):
+#         number = random.randrange(1,10)
+#         serial+=str(number)
+#     for request in requests_table:
+#         if request['request_number'] == serial:
+#         try:
+            
+#     return serial
 
 
 
@@ -199,34 +219,26 @@ def add_requests():
             return redirect('/login')
         
 
-@app.route('/options', methods= ["GET"])
+
+# @app.route('/insert_requests',methods = ['POST','GET'])
+# def insert_requests():
+#     for request in requests_table:
+#         query(f"INSERT INTO requests VALUES('{request_number()}','{session.get('username')},{}'")
+#         query(f"UPDATE requests SET quantity_in_stock = quantity_in_stock +'{int(request.form.get('quantity'))}' WHERE mkt='{request.form.get('mkt')}'")
+
+        
+
+@app.route('/select_category', methods= ["GET"])
 def add_item_request():
-    rows = (query(f"SELECT mkt,\"item name\" FROM items "))
+    chosen_categoey = request.form.get('category')
+    rows = (query(f"SELECT mkt,\"item name\" FROM items WHERE category='{chosen_categoey}'"))
     items =[]
     for row in rows:
         items.append({'mkt':row[0],'item_name':row[1]})
     return jsonify(items)
 
 
-@app.route('/safety', methods= ["GET"])
-def add_safety_items():
-    rows = query(f"SELECT mkt, \"item name\" FROM items WHERE category LIKE '%Safety'")
-    safety_products=[]
-    for row in rows:
-        safety_products.append({'mkt':row[0],'item_name':row[1]})
-    return jsonify(safety_products)
 
-
-@app.route('/metals', methods= ["GET"])
-def add_metals_items():
-    rows = query(f"SELECT mkt, \"item name\" FROM items WHERE category LIKE '%Metals'")
-    metals_products=[]
-    for row in rows:
-        metals_products.append({'mkt':row[0],'item_name':row[1]})
-    return (metals_products)
-
-
-print(add_metals_items())
     
 
 
@@ -282,6 +294,3 @@ def excel_users():
         download_name='users_data.xlsx',
         mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
         )
-
-
-

@@ -5,7 +5,7 @@
 <div class="request">
     <link rel="stylesheet" href="/static/requests.css">
     <div class="container">
-        <form>
+        <form action="/insert_requests" method="POST">
             <div class="form-group">
                 <label for="category">Item Category</label>
                 <select class="form-control" name="Category" id="category">
@@ -52,7 +52,7 @@
 
     category.addEventListener("change", async function () {
         let categoryValue = category.value;
-        const data = await fetch(`/options`);
+        const data = await fetch(`/select_category`);
         const items = await data.json();
 
         categoryItem.innerHTML = '';
@@ -65,41 +65,7 @@
         });
     });
 
-    
-
-    category.addEventListener("change", async function () {
-        let categoryValue = category.value;
-        const data = await fetch(`/safety`);
-        const safety_products = await data.json();
-        categoryItem.innerHTML = '';
-        const safety_Products = safety_products.filter(item => item.category == "Safety");
-         safety_products.forEach(item => {
-            const option = document.createElement('option');
-            option.value = item.id;
-            option.innerText = item.item_name;
-            categoryItem.appendChild(option);
-        });
-    });
-
-
-    category.addEventListener("change", async function () {
-        let categoryValue = category.value;
-        const data = await fetch(`/metals`);
-        const Metals_products = await data.json();
-        categoryItem.innerHTML = '';
-        const Metals_Products = Metals_products.filter(item => item.category == "Metals");
-         safety_products.forEach(item => {
-            const option = document.createElement('option');
-            option.value = item.id;
-            option.innerText = item.item_name;
-            categoryItem.appendChild(option);
-        });
-    });
-
-        const button=document.getElementById('btn')
-        button.addEventListener('click',function(){
-            window.prompt('hi')
-        })
+       
     
 </script>
 {% endblock %}
