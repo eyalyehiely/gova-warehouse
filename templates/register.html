@@ -1,69 +1,92 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+<link rel="stylesheet" href="/static/register.css">
+<title>Register</title>
+<div class="container">
+    <img src="/static/monkey.jpeg">
+<h3 class="text-center">Gova Warehouse</h3></p>
+<img src="/static/tgh.jpeg">
+<hr>
+</div>
 
 
+<div class="card bg-light">
+<article class="card-body mx-auto" style="max-width: 400px;">
+	<h4 class="card-title mt-3 text-center">Create Account</h4>
+	<form action="/register" method="POST">
+	<div class="form-group input-group">
+		<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+		 </div>
+    <input type="text" id="name" name="name" class="form-control" required autofocus placeholder="Full name">
+
+    </div> 
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+		 </div>
+
+    <input type="email" name="email" class="form-control" required autofocus placeholder="Email">
+
+    </div> <!-- form-group// -->
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+		</div>
+      <input type="text" name="phone" class="form-control" required autofocus placeholder="Phone number">
+
+    </div> 
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="bi bi-person-plus-fill"></i> </span>
+		</div>
+		<select class="form-control">
+			<option selected="">Select your team</option>
+			<option name="team" value="monkeys">Monkeys</option>
+			<option name="team" value="tgh">TGH</option>
+			<option name="team" value="course">Course</option>
+		</select>
+	</div> 
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+		</div>
+    <input type="text" name="username" required autofocus placeholder="Create Username" class="form-control">
+       
+    </div> 
+    <div class="form-group input-group">
+    	<div class="input-group-prepend">
+		    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+		</div>
+    <input type="password" name="password" required autofocus placeholder="Create password" class="form-control">  
+    </div>                                       
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary btn-block"> Create Account </button>
+    </div>       
+    <p class="text-center">Have an account? <a href="/login">Log In</a> </p>
+    <p class="text-center">Forgot your password? <a href="/forgot_password">Click here</a> </p>                                                               
+</form>
+</article>
+</div> 
+
+</div> 
 
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Register</title>
+<br><br><br><br><br>
+<article class="bg-secondary mb-3">  
+<div class="card-body text-center">
+    <h3 class="text-white mt-3"></h3>
+<p class="h5 text-white"><a href="mailto:govawarehouse@gmail.com">click here</a> for support</p>
+<br>
+
+All rights saved to Eyal Yehiely 2023 (c)
+</div>
+</article>
   <link rel="stylesheet" href="/static/register.css">
 </head>
 <body>
-  <div class="logo">
-    <img src="/static/monkey.jpeg">
-    <img src="/static/tgh.jpeg">
-  </div>
-  <h1>Sign up </h1>
-  <div class="register">
-    <form action="/register" method="POST">
-        <div><input type="text" id="name" name="name" required autofocus placeholder="Full name"></div>
-        <br>
-        <div><input type="text" name="username" required autofocus placeholder="Username"></div>
-        <br>
-        <div><input type="password" name="password" required autofocus placeholder="Password"></div>
-        <br>
-        <div><input type="text" name="phone" required autofocus placeholder="Phone number"></div>
-        <br>
-        <div><input type="email" name="email" required autofocus placeholder="Email"> </div>
-        <div>
-        <p>Enter your team:</p>
-        <input type="radio" name="team" value ='Monkeys' /> Monkeys<br />
-        <input type="radio" name="team" value ='Tgh'/>Tgh<br />
-        <input type="radio" name="team" value="Course" /> Course<br />
-        </div>
-        <div id="submit"><input type="submit" value="register"></div>
-        <div id="approval">
-  
-    </form>
-   
-     
-    
-
-  <div>I already have a user<button><a href="/login">login</a></button></div>
-  
-  </div> 
-  <br><br><hr>
-<div> <p><a href="mailto:govawarehouse@gmail.com">click here</a> to send us an email </p></div>
-</body>
 
 
 
-<script>
-  let button = document.getElementById("submit");
-  button.addEventListener("click",async function() {
-        const data = await fetch(`/return_username`);
-        const usernames = await data.json();
-        usernames.forEach(username => {
-        if (document.getElementById('username').value === username.username) {
-          alert("Username already exists");
-        } else {
-          alert("Registration complete");
-        }     
-  });
-
-    });
-</script>
-
-</html>  

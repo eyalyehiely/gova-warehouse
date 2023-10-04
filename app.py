@@ -72,7 +72,6 @@ def login():
         if ((request.form['username'] == user['username']) and (request.form['password'] == user['password'])):
             session['username'] = request.form['username'] 
             return redirect('/')
-    
     return redirect('/register')
 
         
@@ -98,6 +97,20 @@ def register():
     
     session['username'] = request.form['username'] 
     return redirect('/')
+
+
+@app.route('/forgot_password',methods=['POST','GET'])
+def forgot_password():
+    new_password = request.form.get('new_password')
+    username =request.form.get('username')
+    for user in users_table:
+        if (username == user['username']):
+            query(f"UPDATE users SET password='{new_password}'WHERE username='{username}'") 
+            return redirect('/login')
+        
+    return render_template('forgot_password.html')
+
+    
 
 
 

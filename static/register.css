@@ -1,49 +1,44 @@
 
-.register{
-  border: 1px solid black;
-  border-radius: 5px;
-  box-shadow: 2px 2px;
-  margin-top: 2vh;
-  width:20vw;
-  height: 30vh;
-  margin-left: 35vw;
-  background-color: grey;
-  padding-left: 10vw;
-  padding-top: 2vh;
-}
-
-.register:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-  }
-
-h1{
+.divider-text {
+  position: relative;
   text-align: center;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+.divider-text span {
+  padding: 7px;
+  font-size: 12px;
+  position: relative;   
+  z-index: 2;
+}
+.divider-text:after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  border-bottom: 1px solid #ddd;
+  top: 55%;
+  left: 0;
+  z-index: 1;
 }
 
-#submit{
-  padding-left: 15vw;
-  padding-bottom: 2vh;
+.btn-facebook {
+  background-color: #405D9D;
+  color: #fff;
+}
+.btn-twitter {
+  background-color: #42AEEC;
+  color: #fff;
 }
 
-#submit:hover{
-  box-shadow: 0 3px 5px 0 rgba(0,0,0,0.2);
-}
-
-button{
-  background-color: grey;
-  border-radius: 3px;
-}
-button:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+.container{
+    display: flex;
+    flex-direction: row;
+    align-items: center; 
+    justify-content: center; 
+    text-align: center; 
   }
+  
 
-.logo{
-  display: flex;
-  flex-direction: row;
-  background-color: white;
-  height: 10vh;
-  gap: 94vw;
-}
 img{
   width: 40px;
   height: 40px;
