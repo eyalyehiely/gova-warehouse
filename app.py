@@ -76,11 +76,13 @@ def register():
     if request.method == 'GET':
         return render_template('register.html')
     
+    new_user=request.form['username']
     for user in users_table:
-        if request.form['username'] == user['username']:
-            message ='No valid user'
-            return render_template('register.html',message=message)
-    query(f"INSERT INTO users VALUES('{request.form['name']}' ,'{request.form['username']}' , '{request.form['password']}' , '{request.form['phone']}' , '{request.form['email']}', '{request.form['team']}' )")
+        if new_user == user['username']:
+            return render_template('register.html',users_table=users_table,new_user=new_user,message='This user is already exist')
+        
+    query(f"INSERT INTO users VALUES('{request.form['name']}' ,'{request.form['username']}' , '{request.form['password']}' , '{request.form['phone']}' , '{request.form['email']}', '{request.form.get('team')}' )")
+    
     session['username'] = request.form['username'] 
     return redirect('/')
 
@@ -90,12 +92,15 @@ def register():
 def users_menu():
     if session.get('username') == 'admin':
         return render_template('users_menu.html')
-    
+
+
+#delete user
 @app.route('/admin/users_menu/delete',methods = ['GET','POST'])
 def delete_user():
-    query(f"DELETE FROM users WHERE username='{request.form.get('username')}'")
+    deleted_user = request.form.get('username')
+    query(f"DELETE FROM users WHERE username='{deleted_user}'")
     
-    return render_template('delete_user.html')
+    return render_template('delete_user.html',users_table=users_table,deleted_user=deleted_user,message1 = 'No such user',message2 = 'User deleted')
 
 
 with sqlite3.connect('users.db') as conn: 
@@ -195,12 +200,33 @@ def add_requests():
         
 
 @app.route('/options', methods= ["GET"])
-def new_item():
-    items = [
-        {'id':'ropes','item name':'atc'},
-        {'id':'option2','item name':'asap'}
-            ]
+def add_item_request():
+    rows = (query(f"SELECT mkt,\"item name\" FROM items "))
+    items =[]
+    for row in rows:
+        items.append({'mkt':row[0],'item_name':row[1]})
     return jsonify(items)
+
+
+@app.route('/safety', methods= ["GET"])
+def add_safety_items():
+    rows = query(f"SELECT mkt, \"item name\" FROM items WHERE category LIKE '%Safety'")
+    safety_products=[]
+    for row in rows:
+        safety_products.append({'mkt':row[0],'item_name':row[1]})
+    return jsonify(safety_products)
+
+
+@app.route('/metals', methods= ["GET"])
+def add_metals_items():
+    rows = query(f"SELECT mkt, \"item name\" FROM items WHERE category LIKE '%Metals'")
+    metals_products=[]
+    for row in rows:
+        metals_products.append({'mkt':row[0],'item_name':row[1]})
+    return (metals_products)
+
+
+print(add_metals_items())
     
 
 

@@ -3,19 +3,17 @@
 {% block navbar %}
 <h2>Add a new request</h2>
 <div class="request">
-<link rel="stylesheet" href="/static/requests.css">
-<body>
+    <link rel="stylesheet" href="/static/requests.css">
     <div class="container">
         <form>
             <div class="form-group">
                 <label for="category">Item Category</label>
                 <select class="form-control" name="Category" id="category">
-                    <option value="ropes">ropes</option>
+                    <option value="ropes">Ropes</option>
                     <option value="descenders">Descenders</option>
-                    <option value="descenders">Descenders</option>
-                    <option value="rope clamps">Rope clamps</option>
+                    <option value="rope_clamps">Rope Clamps</option>
                     <option value="safety">Safety</option>
-                    <option value="Metals">Metals</option>
+                    <option value="metals">Metals</option>
                     <option value="textile">Textile</option>
                     <option value="tripods">Tripods</option>
                     <option value="stretcher">Stretcher</option>
@@ -29,39 +27,83 @@
                     
                 </select>
             </div>
+            <!-- <button id="btn">add row</button> -->
+            <div>
+                <label for="taking_date">Taking date</label>
+                <input type="date" name="taking_date" id="taking_date" required placeholder="Taking date">
+            </div>
+            
+
+            <div>
+                <label for="returning_date">Returning date</label>
+                <input type="date" name="returning_date" id="returning_date" required placeholder="Returning date">
+            </div>
+
+            <div>
+                <input type="submit" value="send">
+            </div>
         </form>
     </div>
-
-    <script>
-        const category = document.getElementById('category');
-        const categoryItem = document.getElementById('category-item');
-
-        category.addEventListener("change", async function () {
-            let categoryValue = category.value;
-            console.log(categoryValue);
-            const data = await fetch(`/options/${categoryValue}`);
-            const items = await data.json();
-            console.log(items);
-
-            categoryItem.innerHTML = '';
-            items.forEach(item => {
-                const option = document.createElement('option');
-                option.value = item.id;
-                option.innerText = item.name;
-                categoryItem.appendChild(option);
-            });
-        });
-    </script>
-
-    <div>Taking date <input type="date" name="taking_date" required autofocus placeholder="Taking date"></div>
-    <br>
-    <div>Returning date <input type="date" name="returning_date" required autofocus placeholder="Returning date"></div>
-    <br>
-    <div><input type="submit" value="send"></div>
-    </form>
 </div>
+
+<script>
+    const category = document.getElementById('category');
+    const categoryItem = document.getElementById('category-item');
+
+    category.addEventListener("change", async function () {
+        let categoryValue = category.value;
+        const data = await fetch(`/options`);
+        const items = await data.json();
+
+        categoryItem.innerHTML = '';
+        items.forEach(item => {
+            const option = document.createElement('option');
+            option.value = item.id;
+            option.innerText = item.item_name;
+            categoryItem.appendChild(option);
+           
+        });
+    });
+
+    
+
+    category.addEventListener("change", async function () {
+        let categoryValue = category.value;
+        const data = await fetch(`/safety`);
+        const safety_products = await data.json();
+        categoryItem.innerHTML = '';
+        const safety_Products = safety_products.filter(item => item.category == "Safety");
+         safety_products.forEach(item => {
+            const option = document.createElement('option');
+            option.value = item.id;
+            option.innerText = item.item_name;
+            categoryItem.appendChild(option);
+        });
+    });
+
+
+    category.addEventListener("change", async function () {
+        let categoryValue = category.value;
+        const data = await fetch(`/metals`);
+        const Metals_products = await data.json();
+        categoryItem.innerHTML = '';
+        const Metals_Products = Metals_products.filter(item => item.category == "Metals");
+         safety_products.forEach(item => {
+            const option = document.createElement('option');
+            option.value = item.id;
+            option.innerText = item.item_name;
+            categoryItem.appendChild(option);
+        });
+    });
+
+        const button=document.getElementById('btn')
+        button.addEventListener('click',function(){
+            window.prompt('hi')
+        })
+    
+</script>
 {% endblock %}
 
-{% block footer %}
-{% endblock %}
-</body>
+
+<!-- "<label for=" + 'item> Item Name</label>',
+           "<select class=form-control name=Item id=category-item></select>") -->

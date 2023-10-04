@@ -8,7 +8,25 @@
         <br>
         <div><input type="password" name="password" required autofocus placeholder="Password"></div>
         <br>
-        <div><input type="submit" value="Delete!"></div>
+        <div id="button" onclick="myfunction()"><input type="submit" value="Delete!"></div>
     </form>
   </div>
+    {% for user in users_table %}
+      {% if deleted_user== user %}
+        {{ message2 }}
+      {% elif deleted_user== user %}
+        {{ message2 }}
+      {% endif %}
+    {% endfor %}
 {%endblock%}
+
+<script>
+  function myfunction(){
+    const button=document.getElementById('button')
+    users_table
+  }
+
+  
+</script>
+
+

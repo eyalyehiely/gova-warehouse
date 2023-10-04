@@ -1,13 +1,9 @@
-function add_input() {
-   var newInput = document.createElement('input')
-   newInput.type = 'text'
-   newInput.type = 'integer'
+
+users_table = users_data()
+function register_message(){
+    let name = document.getElementById('name')
+    array.forEach(element => {
+        
+    });
+    if (name);
 }
-
-
-function message(){
-    
-
-}
-
-

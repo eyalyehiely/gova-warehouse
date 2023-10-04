@@ -14,7 +14,7 @@
   <h1>Sign up </h1>
   <div class="register">
     <form action="/register" method="POST">
-        <div><input type="text" name="name" required autofocus placeholder="Full name"></div>
+        <div><input type="text" id="name" name="name" required autofocus placeholder="Full name"></div>
         <br>
         <div><input type="text" name="username" required autofocus placeholder="Username"></div>
         <br>
@@ -25,15 +25,17 @@
         <div><input type="email" name="email" required autofocus placeholder="Email"> </div>
         <div>
         <p>Enter your team:</p>
-        <input type="radio" name="team" />  Monkeys<br />
-        <input type="radio" name="team" />  Tgh<br />
-        <input type="radio" name="team" />  Training<br />
+        <input type="radio" name="team" value ='Monkeys' /> Monkeys<br />
+        <input type="radio" name="team" value ='Tgh'/>Tgh<br />
+        <input type="radio" name="team" value="Course" /> Course<br />
         </div>
-        <div id="submit"><input type="submit" value="register"></div>
+        <div id="submit" onclick="register_message()"><input type="submit" value="register"></div>
         <div id="approval">
-        {%if message%}
-          <p>{{message}}</p>
-          {%endif%}
+          {%for user in users_table%}
+            {%if new_user == user['username']%}
+             {{message}}
+            {%endif%}
+            {%endfor%}
     </form>
    
      
