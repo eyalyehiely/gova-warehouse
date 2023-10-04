@@ -41,7 +41,7 @@ def requests_data():
     rows = (query(f"SELECT * FROM requests "))
     table =[]
     for row in rows:
-        table.append({'request number':row[0],'username':row[1],'email':row[2],'phone number':row[3],'items':row[4],'quantity':row[5],'taking date':row[6],'returning date':row[7]})
+        table.append({'request number':row[0],'username':row[1],'items':row[2],'quantity':row[3],'taking date':row[4],'returning date':row[5]})
     return table
 requests_table = requests_data()
 
@@ -148,8 +148,7 @@ def get_items():
         pass
            
     query(f"INSERT INTO items VALUES('{request.form.get('mkt')}', '{request.form.get('category')}', '{request.form.get('item_name')}', '{request.form.get('quantity')}','{request.form.get('quantity')}' ,'{request.form.get('added_by')}','{request.form.get('entrance_date')}','{datetime.datetime.now()}')")
-    message2 = 'item added successfully'
-    return render_template('add_items.html',message2=message2,switch=2)
+    return render_template('add_items.html')
 
 
 
@@ -173,11 +172,10 @@ def update_items():
 
 
 
-
+#delete_item from db
 @app.route('/admim/items/delete',methods = ['GET','POST'])
 def delete_item():
     query(f"DELETE FROM items WHERE mkt='{request.form.get('mkt')}'")
-    
     return render_template('delete_items.html')
 
 
@@ -191,6 +189,7 @@ def delete_item():
 
 @app.route('/requests',methods = ['POST','GET'])
 def requests():
+    #checking validation & return template
    for user in users_table:
         if session.get('username') == user['username']:
             return render_template('requests.html')
@@ -212,6 +211,7 @@ def requests():
 
 @app.route('/add_requests',methods = ['POST','GET'])
 def add_requests():
+   #checking validation & return template
    for user in users_table:
         if session.get('username') == user['username']:
             return render_template('add_requests.html')
@@ -220,26 +220,33 @@ def add_requests():
         
 
 
-# @app.route('/insert_requests',methods = ['POST','GET'])
-# def insert_requests():
-#     for request in requests_table:
-#         query(f"INSERT INTO requests VALUES('{request_number()}','{session.get('username')},{}'")
-#         query(f"UPDATE requests SET quantity_in_stock = quantity_in_stock +'{int(request.form.get('quantity'))}' WHERE mkt='{request.form.get('mkt')}'")
 
-        
+@app.route('/insert_requests',methods = ['POST','GET'])
+def insert_requests():
+    #add request to db & updates the tables
+    username= session.get('username')
+    quantity = request.form.get('quantity')
+    items = request.form['Item']
+    taking_date = request.form.get('taking_date')
+    returning_date =request.form.get('returning_date')
+    query(f"INSERT INTO requests VALUES('1', '{username}','{items}', '{quantity}', '{taking_date}', '{returning_date}')")
+    query(f"UPDATE items SET quantity_in_stock = quantity_in_stock - '{int(quantity)}' WHERE item_name ='{request.form.get('Item')}'") 
+    return render_template('add_requests.html')    
+    
+
 
 @app.route('/select_category', methods= ["GET"])
 def add_item_request():
-    chosen_categoey = request.form.get('category')
-    rows = (query(f"SELECT mkt,\"item name\" FROM items WHERE category='{chosen_categoey}'"))
+    #return all items per category
+    chosen_category = request.args.get('category')
+    rows = query(f"SELECT mkt,item_name FROM items WHERE category='{chosen_category}'")
     items =[]
+    print(rows)
     for row in rows:
-        items.append({'mkt':row[0],'item_name':row[1]})
+        items.append({'mkt':row[0],'item_name':row[1]})   
     return jsonify(items)
 
 
-
-    
 
 
 
@@ -256,7 +263,7 @@ def exit():
 
 
 
-#admin
+#superuser
 #----------------------------------------------------------------------------------#
 @app.route('/admin')
 def admin():
@@ -292,5 +299,23 @@ def excel_users():
         'users.xlsx',
         as_attachment=True,
         download_name='users_data.xlsx',
+        mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        )
+
+
+
+
+
+#export requests table to excel 
+@app.route('/download_excel_requests',methods = ['GET','POST'])
+def excel_requests():
+    with sqlite3.connect('users.db') as conn: 
+        query1 = "SELECT * FROM requests" 
+        df = pandas.read_sql_query(query1, conn)
+    df.to_excel('requests.xlsx',index=False)
+    return send_file(
+        'requests.xlsx',
+        as_attachment=True,
+        download_name='requests_data.xlsx',
         mimetype='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
         )

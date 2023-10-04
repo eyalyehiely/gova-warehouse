@@ -24,10 +24,11 @@
             <div class="form-group">
                 <label for="item">Item Name</label>
                 <select class="form-control" name="Item" id="category-item">
-                    
                 </select>
+               
             </div>
-            <!-- <button id="btn">add row</button> -->
+            <input type="number" name="quantity" required autofocus placeholder="Quantity">
+        
             <div>
                 <label for="taking_date">Taking date</label>
                 <input type="date" name="taking_date" id="taking_date" required placeholder="Taking date">
@@ -52,16 +53,15 @@
 
     category.addEventListener("change", async function () {
         let categoryValue = category.value;
-        const data = await fetch(`/select_category`);
+        const data = await fetch(`/select_category?category=${categoryValue}`);
         const items = await data.json();
 
         categoryItem.innerHTML = '';
         items.forEach(item => {
             const option = document.createElement('option');
-            option.value = item.id;
+            option.value = item.item_name;
             option.innerText = item.item_name;
             categoryItem.appendChild(option);
-           
         });
     });
 
