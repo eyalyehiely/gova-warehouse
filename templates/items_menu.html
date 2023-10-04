@@ -1,17 +1,25 @@
 {%extends 'base.html'%}
 {%block navbar%}
-
-
+<link rel="stylesheet" href="/static/items_menu.css">
 <h1>Items menu</h1>
-<div class="navbar">
-    <a href="/items/add_items">add items</a>
-    <a href="/admin/items/update">update items</a>
-    <a href="/admim/items/delete">Delete item</a>
-</div>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="methods">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="/items/add_items">add items</a>
+                    <a class="nav-link" href="/admin/items/update">Update items</a>
+                    <a class="nav-link" href="/admim/items/delete">Delete item</a>
+                    <a class="nav-link" href="/download_file">Export to Excel</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
-<form action="/download_file" method="POST">
-   <input type="submit" value="export to excel">
-</form>
+
+
+
 {%endblock%}
   
 

@@ -1,0 +1,16 @@
+
+{%extends 'base.html'%}
+{%block navbar%}
+<link rel="stylesheet" href="/static/delete_requests.css">
+<a href="/requests_menu">request menu</a>
+<h1>Delete request</h1>
+<div class="delete-request">
+    <form action="/requests_menu/delete_requests" method="POST">
+    <div><input type="text" name="request_number" required autofocus placeholder="Request number"></div>
+        <br>
+        <br>
+        <div><input type="submit" value="Delete!"></div>
+    </form>
+  </div>
+
+{%endblock%}

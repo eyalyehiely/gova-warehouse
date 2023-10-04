@@ -1,3 +1,7 @@
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,13 +33,9 @@
         <input type="radio" name="team" value ='Tgh'/>Tgh<br />
         <input type="radio" name="team" value="Course" /> Course<br />
         </div>
-        <div id="submit" onclick="register_message()"><input type="submit" value="register"></div>
+        <div id="submit"><input type="submit" value="register"></div>
         <div id="approval">
-          {%for user in users_table%}
-            {%if new_user == user['username']%}
-             {{message}}
-            {%endif%}
-            {%endfor%}
+  
     </form>
    
      
@@ -47,4 +47,23 @@
   <br><br><hr>
 <div> <p><a href="mailto:govawarehouse@gmail.com">click here</a> to send us an email </p></div>
 </body>
-</html> 
+
+
+
+<script>
+  let button = document.getElementById("submit");
+  button.addEventListener("click",async function() {
+        const data = await fetch(`/return_username`);
+        const usernames = await data.json();
+        usernames.forEach(username => {
+        if (document.getElementById('username').value === username.username) {
+          alert("Username already exists");
+        } else {
+          alert("Registration complete");
+        }     
+  });
+
+    });
+</script>
+
+</html>  

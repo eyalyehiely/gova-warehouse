@@ -4,10 +4,11 @@
 <h2>Add a new request</h2>
 <div class="request">
     <link rel="stylesheet" href="/static/requests.css">
+    
     <div class="container">
         <form action="/insert_requests" method="POST">
             <div class="form-group">
-                <label for="category">Item Category</label>
+                <label for="category">Item Category</label required>
                 <select class="form-control" name="Category" id="category">
                     <option value="ropes">Ropes</option>
                     <option value="descenders">Descenders</option>
@@ -23,11 +24,11 @@
 
             <div class="form-group">
                 <label for="item">Item Name</label>
-                <select class="form-control" name="Item" id="category-item">
+                <select class="form-control" name="Item" id="category-item" required>
                 </select>
                
             </div>
-            <input type="number" name="quantity" required autofocus placeholder="Quantity">
+            <input type="number" name="quantity" required autofocus placeholder="Quantity" min="0" max="{{quantity_in_stock}}"required>
         
             <div>
                 <label for="taking_date">Taking date</label>
@@ -39,7 +40,9 @@
                 <label for="returning_date">Returning date</label>
                 <input type="date" name="returning_date" id="returning_date" required placeholder="Returning date">
             </div>
-
+            <div>
+                <input type="image" src="" alt="">
+            </div>
             <div>
                 <input type="submit" value="send">
             </div>
