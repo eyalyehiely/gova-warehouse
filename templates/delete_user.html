@@ -1,32 +1,48 @@
 {%extends 'base.html'%}
 {%block navbar%}
-<link rel="stylesheet" href="/static/delete_user.css">
-<h1>Delete user</h1>
-<div class="delete_user">
-    <form action="/admin/users_menu/delete" method="POST">
-    <div><input type="text" name="username" required autofocus placeholder="Username"></div>
-        <br>
-        <div><input type="password" name="password" required autofocus placeholder="Password"></div>
-        <br>
-        <div id="button" onclick="myfunction()"><input type="submit" value="Delete!"></div>
-    </form>
-  </div>
-    {% for user in users_table %}
-      {% if deleted_user== user %}
-        {{ message2 }}
-      {% elif deleted_user== user %}
-        {{ message2 }}
-      {% endif %}
-    {% endfor %}
+
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/static/delete_user.css">
+</head>
+<body>
+    <div>
+        <a href="/admin/users_menu"><svg xmlns="http://www.w3.org/2000/svg" style="margin-left: 1vw;" width="20" height="20" fill="currentColor" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5z"/>
+          </svg></a>
+    </div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    Delete User
+                </div>
+                <div class="card-body">
+                    <form action="/admin/users_menu/delete" method="POST">
+                      <label for="item_id">Enter username</label>
+                      <input type="text" class="form-control" id="item_id" name="username" required placeholder="Username">
+                        <hr>
+                        <button type="submit" class="btn btn-danger btn-block">Delete User</button>
+                    </form>
+               
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+
 {%endblock%}
 
-<script>
-  function myfunction(){
-    const button=document.getElementById('button')
-    users_table
-  }
 
-  
-</script>
+
+
+
+
+
+
 
 

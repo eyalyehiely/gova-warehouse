@@ -2,17 +2,27 @@ h1{
     text-align: center;
     }
     
+.container {
+    margin-top: 10vh;
+}
+.card {
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.card-header {
+    text-align: center;
+    background-color: #dc3545;
+    color: #fff;
+}
+.form-group label {
+    font-weight: bold;
     
-    
-.delete-request{
-    border: 1px solid black;
-    border-radius: 5px;
-    box-shadow: 2px 2px;
-    margin-top: 2vh;
-    width:20vw;
-    height: 20vh;
-    margin-left: 35vw;
-    background-color: grey;
-    padding-left: 10vw;
-    padding-top: 5vh;
+}
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+.btn-danger:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
     }

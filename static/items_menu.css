@@ -5,7 +5,8 @@ h1{
 .nav-item{
     display: flex;
     flex-direction: row;
-    text-align: center;
-    gap: 10px;
+    justify-content: center;
+    gap: 3vw;
+    
 
 }

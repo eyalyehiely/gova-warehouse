@@ -1,31 +1,49 @@
 {%extends 'base.html'%}
 {%block navbar%}
-    <link rel="stylesheet" href="/static/updating_items.css">
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-    <h1>Update items form</h1>
-    <button style="background-color:grey;"><a href="/items">return</a></button>
-  
-<div class="form">
-  <form action="/admin/items/update" method="POST">
-    <div><input type="text" name="mkt" required autofocus placeholder="Serial number"> </div>
-    <br>
-    <div><input type="number" name="quantity" required autofocus placeholder="Quantity" min="1"></div>
-    <br>
-    <div><input type="text" name="added_by" required autofocus placeholder="Added by"></div>
-    <br>
-    <div><input type="submit" value="Add!"></div>
-  </form>
+       <link rel="stylesheet" href="/static/updating_items.css">
 
 
-    {%if switch%}
-    <div class="alert-success">
-      item updated
+<body>
+    <div>
+        <a href="/items"><svg xmlns="http://www.w3.org/2000/svg" style="margin-left: 1vw;" width="20" height="20" fill="currentColor" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5z"/>
+          </svg></a>
     </div>
-    {%else%}
-    <div class="alert-danger">
-      item doesn't exist
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header" style="text-align: center;">
+                    Update Item
+                </div>
+                <div class="card-body">
+                    <form action="/admin/items/update" method="POST">
+                        <div class="form-group">
+                            <label for="serial_number">Serial Number</label>
+                            <input type="text" class="form-control" id="serial_number" name="mkt" required autofocus placeholder="Enter Serial Number">
+                        </div>
+                        <div class="form-group">
+                            <label for="quantity">Quantity</label>
+                            <input type="number" class="form-control" id="quantity" name="quantity" required autofocus placeholder="Enter Quantity" min="1">
+                        </div>
+                        <div class="form-group">
+                            <label for="added_by">Added By</label>
+                            <input type="text" class="form-control" id="added_by" name="added_by" required autofocus placeholder="Enter Added By">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Update Item</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+</body>
 
-{%endif%}
+
+
 {%endblock%}

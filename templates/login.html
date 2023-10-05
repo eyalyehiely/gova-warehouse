@@ -1,17 +1,83 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login</title>
-  <link rel="stylesheet" href="/static/login.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+    <link rel="stylesheet" href="/static/login.css">
+    <style>
+        
+        .card {
+            max-width: 50vw; 
+            margin: 0 auto; 
+            padding: 20px;
+            height:48vh; 
+        }
+    </style>
+    <title>Login</title>
 </head>
 <body>
-  <div class="logo">
-    <img id="img1" src="/static/monkey.jpeg">
-    <img src="/static/tgh.jpeg" >
-  </div>
-    <h1>Gova Warehouse</h1>
+<div class="container">
+    <img src="/static/monkey.jpeg">
+    <h2 style="text-align: center;">Gova Warehouse</h2>
+    <img src="/static/tgh.jpeg">
+    <hr>
+</div>
+
+<br><br><br><br><br>
+
+<div class="card bg-light">
+    <article class="card-body mx-auto">
+        <h4 class="card-title mt-3 text-center">Login</h4>
+        <form action="/login" method="POST">
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                </div>
+                <input type="text" id="name" name="username" class="form-control" required autofocus placeholder="Username">
+            </div>
+            <br>
+            <div class="form-group input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                </div>
+                <input type="password" name="password" class="form-control" required autofocus placeholder="Password">
+            </div>
+            <br><br>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
+            </div>
+            <div>
+              <p class="text-center">Not a member? <a href="/register">Sign up</a> </p>
+              <p class="text-center">Forgot your password? <a href="/forgot_password">Click here</a> </p>
+            </div>
+            
+        </form>
+    </article>
+</div>
+
+<br><br><br><br><br>
+<article class="bg-secondary mb-3">
+    <div class="card-body text-center">
+        <h3 class="text-white mt-3"></h3>
+        <p class="h5 text-white"><a href="mailto:govawarehouse@gmail.com">click here</a> for support</p>
+        <br>
+
+        All rights saved to Eyal Yehiely 2023 (c)
+    </div>
+</article>
+<link rel="stylesheet" href="/static/register.css">
+</body>
+</html>
+
+
+
+
+<!-- 
+
+
+
   
 
   <div class="login">
@@ -25,10 +91,3 @@
        or
       <button style="background-color:grey"><a href="/register">Sign up</a></button></div>
     </form>
-  </div> 
- <div class="footer">
-  {%block footer%}
-  {%endblock%}
- </div>
-</body>                     
-</html>

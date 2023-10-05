@@ -67,10 +67,11 @@ def home():
 def login():
     if request.method == 'GET':
         return render_template('login.html')
-    
+    username = request.form.get('username')
+    password = request.form.get('password')
     for user in users_table:
-        if ((request.form['username'] == user['username']) and (request.form['password'] == user['password'])):
-            session['username'] = request.form['username'] 
+        if ((username == user['username']) and (password == user['password'])):
+            session['username'] = username
             return redirect('/')
     return redirect('/register')
 

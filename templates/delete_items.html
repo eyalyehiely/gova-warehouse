@@ -1,16 +1,44 @@
 
 {%extends 'base.html'%}
 {%block navbar%}
-<link rel="stylesheet" href="/static/delete_item.css">
-<a href="/items">return</a>
-<h1>Delete item</h1>
-<div class="delete_item">
-    <form action="/admim/items/delete" method="POST">
-    <div><input type="text" name="mkt" required autofocus placeholder="Item serial number"></div>
-        <br>
-        <br>
-        <div><input type="submit" value="Delete!"></div>
-    </form>
-  </div>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/static/delete_item.css">
+    <title>Delete Item</title>
+</head>
+<body>
+    <div>
+        <a href="/items"><svg xmlns="http://www.w3.org/2000/svg" style="margin-left: 1vw;" width="20" height="20" fill="currentColor" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5z"/>
+          </svg></a>
+    </div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    Delete Item
+                </div>
+                <div class="card-body">
+                    <form action="/admin/items/delete" method="POST">
+                        <div class="form-group">
+                            <label for="item_id">Item Serial Number</label>
+                            <input type="text" class="form-control" id="item_id" name="mkt" required placeholder="Enter Item Serial Number">
+                        </div>
+                        <button type="submit" class="btn btn-danger btn-block">Delete Item</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
 
 {%endblock%}

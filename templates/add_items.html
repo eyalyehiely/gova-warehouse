@@ -1,45 +1,71 @@
 {%extends 'base.html'%}
 {%block navbar%}
-<link rel="stylesheet" href="/static/items.css">
-<title>Gova Warehouse</title>
-<h1>Items insert form</h1>
-<div class="navbar">
-  <a href="/items">return</a>
-</div>
 
-
-<div class="add_items">
-  <form action="/items/add_items" method="POST">
-    <div class="form">
-      <div><input type="text" name="mkt" required autofocus placeholder="Serial number"> </div>
-      <br>
-      <div>
-        <select name="category">
-          <option value="ropes">Ropes</option>
-          <option value="descenders">Descenders</option>
-          <option value="rope clamps">Rope clamps</option>
-          <option value="safety">Safety</option>
-          <option value="Metals">Metals</option>
-          <option value="textile">Textile</option>
-          <option value="tripods">Tripods</option>
-          <option value="stretcher">Stretcher</option>
-          <option value="specials">Specials</option>
-        </select>
-      </div>
-      <br>
-      <div><input type="text" name="item_name" required autofocus placeholder="Item name"></div>
-      <br>
-      <div><input type="number" name="quantity" required autofocus placeholder="Quantity"></div>
-      <br>
-      <div><input type="text" name="added_by" required autofocus placeholder="Added by"></div>
-      <br>
-      <div><p>Entrance date</p><input type="date" name="entrance_date" required autofocus placeholder="Entrance date"></div>
-      <br>
-      <div><input type="submit" value="Add!"></div>
-
-      
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/static/add_items.css">
+</head>
+<body>
+    <div>
+        <a href="/items"><svg xmlns="http://www.w3.org/2000/svg" style="margin-left: 1vw;" width="20" height="20" fill="currentColor" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5z"/>
+          </svg></a>
     </div>
-  </form>
+    
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    Add Item
+                </div>
+                <div class="card-body">
+                    <form action="/items/add_items" method="POST">
+                        <div class="form-group">
+                            <label for="serial_number">Serial Number</label>
+                            <input type="text" class="form-control" id="serial_number" name="mkt" required autofocus placeholder="Enter Serial Number">
+                        </div>
+                        <div class="form-group">
+                            <label for="category">Category</label>
+                            <select class="form-control" id="category" name="category">
+                                <option value="ropes">Ropes</option>
+                                <option value="descenders">Descenders</option>
+                                <option value="rope_clamps">Rope Clamps</option>
+                                <option value="safety">Safety</option>
+                                <option value="metals">Metals</option>
+                                <option value="textile">Textile</option>
+                                <option value="tripods">Tripods</option>
+                                <option value="stretcher">Stretcher</option>
+                                <option value="specials">Specials</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="item_name">Item Name</label>
+                            <input type="text" class="form-control" id="item_name" name="item_name" required autofocus placeholder="Enter Item Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="quantity">Quantity</label>
+                            <input type="number" class="form-control" id="quantity" name="quantity" required autofocus placeholder="Enter Quantity">
+                        </div>
+                        <div class="form-group">
+                            <label for="added_by">Added By</label>
+                            <input type="text" class="form-control" id="added_by" name="added_by" required autofocus placeholder="Enter Added By">
+                        </div>
+                        <div class="form-group">
+                            <label for="entrance_date">Entrance Date</label>
+                            <input type="date" class="form-control" id="entrance_date" name="entrance_date" required autofocus>
+                        </div>
+                        <button type="submit" class="btn btn-success btn-block">Add Item</button>
+                    </form>
+                </div>
+        
+        </div>
+    </div>
 </div>
+</body>
+</html>
+
 {%endblock%}
 
