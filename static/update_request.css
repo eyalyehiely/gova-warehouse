@@ -1,0 +1,22 @@
+h1{
+  text-align: center;
+  }
+  
+.container {
+  /* margin-top:  0 px; */
+}
+.card {
+  border: 1 px solid black ;
+  border-radius: 3px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.card-header {
+  height:6vh;
+  text-align: center;
+  background-color: orange;
+  color: #fff;
+}
+.form-group label {
+  font-weight: bold;
+  
+}

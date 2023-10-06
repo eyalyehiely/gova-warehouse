@@ -1,6 +1,6 @@
 #general
 #-------------------------------------------------------------------------#  
-from flask import Flask,render_template,redirect,request,session,send_file, jsonify
+from flask import Flask,render_template,redirect,request,session,send_file,jsonify
 import sqlite3,datetime,pandas
 import random
 from flask_cors import CORS
@@ -41,7 +41,7 @@ def requests_data():
     rows = (query(f"SELECT * FROM requests "))
     table =[]
     for row in rows:
-        table.append({'request number':row[0],'username':row[1],'items':row[2],'quantity':row[3],'taking date':row[4],'returning date':row[5]})
+        table.append({'request_number':row[0],'username':row[1],'items':row[2],'quantity':row[3],'taking date':row[4],'returning date':row[5]})
     return table
 requests_table = requests_data()
 
@@ -167,7 +167,7 @@ def insert_requests():
         taking_date = request.form.get('taking_date')
         returning_date =request.form.get('returning_date')
         status = "not approved"
-        query(f"INSERT INTO requests VALUES('{request_number}', '{username}','{items}', '{quantity}', '{taking_date}', '{returning_date}','{status}','{datetime.datetime.today()}')")
+        query(f"INSERT INTO requests VALUES('{request_number}', '{username}','{items}', '{quantity}', '{taking_date}', '{returning_date}','{status}','{datetime.datetime.today()}','{datetime.datetime.today()}')")
         query(f"UPDATE items SET quantity_in_stock = quantity_in_stock - '{int(quantity)}' WHERE item_name ='{request.form.get('Item')}'") 
         return render_template('add_requests.html')   
     except:
@@ -356,7 +356,29 @@ def delete_request():
 
 
 
+#update request from db
+@app.route('/requests_menu/update_requests')
+def update_requests():
+    request_number = request.form.get('request_munber')
+    category = request.form.get('category')
+    item_name = request.form.get('item_name')
+    quantity = request.form.get('quantity')
+    taking_date = request.form.get('taking_date')
+    returning_date = request.form.get('returning_date')
+    status = request.form.get('status')
+    updated_at = datetime.datetime.today()
 
+
+    for requests in requests_table:
+        if request_number== requests['request_number']:
+            query(f"UPDATE requests SET category='{category}' WHERE request_number='{request_number}'")
+            query(f"UPDATE requests SET items='{item_name}' WHERE request_number='{request_number}'")
+            query(f"UPDATE requests SET quantity='{quantity}' WHERE request_number='{request_number}'")
+            query(f"UPDATE requests SET taking_date='{taking_date}' WHERE request_number='{request_number}'")   
+            query(f"UPDATE requests SET returning_date='{returning_date}' WHERE request_number='{request_number}'")
+            query(f"UPDATE requests SET status='{status}' WHERE request_number='{request_number}'")
+            query(f"UPDATE requests SET updated_at='{updated_at}' WHERE request_number='{request_number}'")
+    return render_template('update_request.html')
 
 
 
