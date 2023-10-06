@@ -1,0 +1,16 @@
+[
+    {
+      "category": "safety",
+        "name": "asap",
+        "quantity": "3",
+        "returning_date": "2023-10-03",
+        "taking_date": "2023-10-06"
+    },
+    {
+        "category": "safety",
+        "name": "yo-yo",
+        "quantity": "2",
+        "returning_date": "2023-10-01",
+        "taking_date": "2023-10-05"
+    }
+]

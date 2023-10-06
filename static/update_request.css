@@ -3,7 +3,7 @@ h1{
   }
   
 .container {
-  /* margin-top:  0 px; */
+  margin-top:  0 px;
 }
 .card {
   border: 1 px solid black ;
@@ -11,7 +11,7 @@ h1{
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 .card-header {
-  height:6vh;
+  height:5vh;
   text-align: center;
   background-color: orange;
   color: #fff;

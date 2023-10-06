@@ -1,13 +1,62 @@
 {% extends 'base.html' %}
 {% block navbar %}
-<h1>Welcome {{username}}</h1>
 
-<div class="cards">
-    <div class="card3">
-        facts
+
+    <h1 style="margin-left: 1vw;">Welcome {{username}}</h1>
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    </head>
+    <body>
+    <h3 style="text-align: center;">Warehouse Instructions</h3>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Steps to Follow - Take items</h5>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check-circle"></i> Step A: Click on "My Requests"</li>
+                            <li><i class="fas fa-check-circle"></i> Step B: Click on "Add a New Request"</li>
+                            <li><i class="fas fa-check-circle"></i> Step C: Fill out the form</li>
+                            <li><i class="fas fa-check-circle"></i> Step D: Click on "Add!"</li>
+                            <li><i class="fas fa-check-circle"></i> Step E: Check your WhatsApp account/Mail</li>
+                            <li><i class="fas fa-check-circle"></i> Step F: Follow your request status</li>
+                            <li><i class="fas fa-check-circle"></i> Step G: Take your items</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Steps to Follow - Return Items</h5>
+                        <ul class="list-unstyled">
+                            <li><i class="fas fa-check-circle"></i> Step A: Return all items</li>
+                            <li><i class="fas fa-check-circle"></i> Step B: Fill out the retuen items form</li>
+                            <li><i class="fas fa-check-circle"></i> Step C: Wait for response</li>
+                            <li><i class="fas fa-check-circle"></i> Step D: Thank you for your cooperation!</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    
+    
+
+
+
+
+<script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+
+<br><br><br><br><br><br><br><br>
 
 
 {%endblock%}
