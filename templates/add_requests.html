@@ -1,61 +1,92 @@
-{% extends 'base.html' %}
 
-{% block navbar %}
+{%extends 'base.html'%}
+{%block navbar%}
 
-<div>
-    <a href="/requests"><svg xmlns="http://www.w3.org/2000/svg" style="margin-left: 1vw;" width="20" height="20" fill="currentColor" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
-        <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5z"/>
-      </svg></a>
-</div>
-
-<h2>Add a new request</h2>
-<div class="request">
-    <link rel="stylesheet" href="/static/requests.css">
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/static/update_request.css">
+</head>
+<body>
+    <div>
+        <a href="/requests"><svg xmlns="http://www.w3.org/2000/svg" style="margin-left: 1vw;" width="20" height="20" fill="currentColor" class="bi bi-arrow-return-left" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5z"/>
+          </svg></a>
+    </div>
     
-    <div class="container">
-        <form action="/insert_requests" method="POST">
-            <div class="form-group">
-                <label for="category">Item Category</label required>
-                <select class="form-control" name="Category" id="category">
-                    <option value="ropes">Ropes</option>
-                    <option value="descenders">Descenders</option>
-                    <option value="rope_clamps">Rope Clamps</option>
-                    <option value="safety">Safety</option>
-                    <option value="metals">Metals</option>
-                    <option value="textile">Textile</option>
-                    <option value="tripods">Tripods</option>
-                    <option value="stretcher">Stretcher</option>
-                    <option value="specials">Specials</option>
-                </select>
-            </div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    Add request
+                </div>
+                <div class="card-body">
+                    <form action="/add_requests" method="POST">
+                        <div class="form-group">
+                            <label for="serial_number">Request Number</label>
+                            <input type="text" class="form-control" id="request_munber" name="request_munber" required autofocus placeholder="Enter Request Number: #...">
+                        </div>
+                        <div class="form-group">
+                            <label for="category">Category</label>
+                            <select class="form-control" id="category" name="category">
+                                <option value="ropes">Ropes</option>
+                                <option value="descenders">Descenders</option>
+                                <option value="rope_clamps">Rope Clamps</option>
+                                <option value="safety">Safety</option>
+                                <option value="metals">Metals</option>
+                                <option value="textile">Textile</option>
+                                <option value="tripods">Tripods</option>
+                                <option value="stretcher">Stretcher</option>
+                                <option value="specials">Specials</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="item_name">Item Name</label>
+                            <input type="text" class="form-control" id="item_name" name="item_name" required autofocus placeholder="Enter Item Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="quantity">Quantity</label>
+                            <input type="number" class="form-control" id="quantity" name="quantity" required autofocus placeholder="Enter Quantity">
+                        </div>
 
-            <div class="form-group">
-                <label for="item">Item Name</label>
-                <select class="form-control" name="Item" id="category-item" required>
-                </select>
-               
-            </div>
-            <input type="number" name="quantity" required autofocus placeholder="Quantity" min="0" max="{{quantity_in_stock}}"required>
+                        <div class="form-group">
+                            <label for="Taking date">Taking date</label>
+                            <input type="date" class="form-control" id="taking date" name="taking date" required autofocus placeholder="Enter taking date">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="Returning date">Returning date</label>
+                            <input type="date" class="form-control" id="returning_date" name="returning_date" required autofocus placeholder="Enter returning date">
+                        </div>
+                        <div class="form-group">
+                            <label for="entrance_date">Status</label>
+                            <select class="form-control" id="status" name="status">
+                                <option value="approved">Approved</option>
+                                <option value="Not approved">Not approved</option>
+                        </div>
+                       
+                        <button style="background-color:orange" type="submit" class="btn btn-success btn-block">Update!</button>
+                    </form>
+                </div>
         
-            <div>
-                <label for="taking_date">Taking date</label>
-                <input type="date" name="taking_date" id="taking_date" required placeholder="Taking date">
-            </div>
-            
-
-            <div>
-                <label for="returning_date">Returning date</label>
-                <input type="date" name="returning_date" id="returning_date" required placeholder="Returning date">
-            </div>
-            <div>
-                <input type="image" src="" alt="">
-            </div>
-            <div>
-                <input type="submit" value="send">
-            </div>
-        </form>
+        </div>
     </div>
 </div>
+</body>
+
+
+
+    
+<!-- <br><br><br><br><br><br><br><br><br><br> -->
+
+
+
+
+
+
+ 
 
 <script>
     const category = document.getElementById('category');
